@@ -1,19 +1,13 @@
-function getRandomPositiveFloat(firstNumber, secondNumber, decimalPlaces = 1) {
-  const lower = Math.min(Math.abs(firstNumber), Math.abs(secondNumber));
-  const upper = Math.max(Math.abs(firstNumber), Math.abs(secondNumber));
+function getRandomNumber(from, to, decimalPlaces) {
+  if (from < 0 || to < from) {
+    return console.log('Введен некорректный диапазон');
+  }
+  if (from == to) {
+    return from;
+  }
 
-  const result = Math.random() * (upper - lower) + lower;
-
-  return result.toFixed(decimalPlaces);
-}
-function getRandomPositiveInteger(firstNumber, secondNumber) {
-  const lower = Math.min(Math.abs(firstNumber), Math.abs(secondNumber));
-  const upper = Math.max(Math.abs(firstNumber), Math.abs(secondNumber));
-
-  const result = Math.random() * (upper - lower) + lower;
-
-  return result;
+  let randomNumber = (Math.random() * (to - from + 1) + from).toFixed(decimalPlaces);
+  return randomNumber;
 }
 
-getRandomPositiveFloat();
-getRandomPositiveInteger();
+getRandomNumber();
