@@ -1,4 +1,4 @@
-import {randomPositiveFloat, randomPositiveInteger, randomArrayElement} from './util';
+import {getRandomPositiveFloat, getRandomPositiveInteger, getRandomArrayElement} from './util.js';
 
 'use strict';
 
@@ -86,14 +86,14 @@ const getAuthorAvatar = (number) => {
 
 const getOfferFeatures = () => {
   let features = OFFER_FEATURES.slice();
-  for (let i = 0; i <randomPositiveInteger(0, OFFER_FEATURES.length - 1); i++) {
-    features.splice(randomPositiveInteger(0, OFFER_FEATURES.length - 1), 1);
+  for (let i = 0; i < getRandomPositiveInteger(0, OFFER_FEATURES.length - 1); i++) {
+    features.splice(getRandomPositiveInteger(0, OFFER_FEATURES.length - 1), 1);
   }
   return features;
 };
 
 const getOfferPhotos = () => {
-  return Array.from({length: Math.floor(Math.random() * 10)}, () => OFFER_PHOTOS[randomPositiveInteger(0, OFFER_PHOTOS.length - 1)]);
+  return Array.from({length: Math.floor(Math.random() * 10)}, () => OFFER_PHOTOS[getRandomPositiveInteger(0, OFFER_PHOTOS.length - 1)]);
 }
 
 const createSimilarAdNearby = (numberOfAd) => {
@@ -103,23 +103,32 @@ const createSimilarAdNearby = (numberOfAd) => {
       avatar: getAuthorAvatar(numberOfAd),
     },
     offer: {
-      title: randomArrayElement(OFFER_TITLES),
+      title: getRandomArrayElement(OFFER_TITLES),
       address: '',
-      price: randomPositiveInteger(MIN_PRICE, MAX_PRICE),
-      type: randomArrayElement(OFFER_TYPES),
-      rooms: randomPositiveInteger(MIN_ROOMS_COUNT, MAX_ROOMS_COUNT),
-      guests: randomPositiveInteger(MIN_GUESTS_COUNT, MAX_GUESTS_COUNT),
-      checkin: randomArrayElement(OFFER_CHECKTIMES),
-      checkout: randomArrayElement(OFFER_CHECKTIMES),
+      price: getRandomPositiveInteger(MIN_PRICE, MAX_PRICE),
+      type: getRandomArrayElement(OFFER_TYPES),
+      rooms: getRandomPositiveInteger(MIN_ROOMS_COUNT, MAX_ROOMS_COUNT),
+      guests: getRandomPositiveInteger(MIN_GUESTS_COUNT, MAX_GUESTS_COUNT),
+      checkin: getRandomArrayElement(OFFER_CHECKTIMES),
+      checkout: getRandomArrayElement(OFFER_CHECKTIMES),
       features: getOfferFeatures(),
-      description: randomArrayElement(OFFER_DESCRIPTIONS),
+      description: getRandomArrayElement(OFFER_DESCRIPTIONS),
       photos: getOfferPhotos(),
     },
     location: {
-      lat: randomPositiveFloat(MIN_LOCATION_COORDINATE, MAX_LOCATION_COORDINATE, DECIMAL_POINTS_COUNT),
-      lng: randomPositiveFloat(MIN_LOCATION_COORDINATE, MAX_LOCATION_COORDINATE, DECIMAL_POINTS_COUNT),
+      lat: getRandomPositiveFloat(MIN_LOCATION_COORDINATE, MAX_LOCATION_COORDINATE, DECIMAL_POINTS_COUNT),
+      lng: getRandomPositiveFloat(MIN_LOCATION_COORDINATE, MAX_LOCATION_COORDINATE, DECIMAL_POINTS_COUNT),
     },
   }
 }
 
-export const similarAdNearby = createSimilarAdNearby();
+const SIMILAR_AD_COUNT = 1;
+const SIMILAR_AD = [];
+
+for (let currentObject = 0; currentObject < SIMILAR_AD_COUNT; currentObject++) {
+  SIMILAR_AD.push(createSimilarAdNearby(currentObject));
+  SIMILAR_AD[currentObject]['offer'].address = `${SIMILAR_AD[currentObject]['location'].lat}, ${SIMILAR_AD[currentObject]['location'].lng}`;
+}
+console.log(SIMILAR_AD);
+
+export {SIMILAR_AD};

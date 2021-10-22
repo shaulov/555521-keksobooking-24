@@ -10,7 +10,7 @@ function getRandomPositiveFloat (a, b, digits = 1) {
   return result.toFixed(digits);
 }
 
-export const randomPositiveFloat = getRandomPositiveFloat();
+export {getRandomPositiveFloat};
 
 function getRandomPositiveInteger (a, b) {
   const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
@@ -20,10 +20,10 @@ function getRandomPositiveInteger (a, b) {
   return Math.floor(result);
 }
 
-export const randomPositiveInteger = getRandomPositiveInteger();
+export {getRandomPositiveInteger};
 
 const getRandomArrayElement = (array) => {
-  return array[randomPositiveInteger(0, array.length - 1)];
+  return array[getRandomPositiveInteger(0, array.length - 1)];
 };
 
-export const randomArrayElement = getRandomArrayElement();
+export {getRandomArrayElement};
