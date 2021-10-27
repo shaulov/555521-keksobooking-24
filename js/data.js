@@ -129,6 +129,5 @@ for (let currentObject = 0; currentObject < SIMILAR_AD_COUNT; currentObject++) {
   SIMILAR_AD.push(createSimilarAdNearby(currentObject));
   SIMILAR_AD[currentObject]['offer'].address = `${SIMILAR_AD[currentObject]['location'].lat}, ${SIMILAR_AD[currentObject]['location'].lng}`;
 }
-console.log(SIMILAR_AD);
 
 export {SIMILAR_AD};
