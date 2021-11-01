@@ -27,3 +27,20 @@ const getRandomArrayElement = (array) => {
 };
 
 export {getRandomArrayElement};
+
+const setDisabledFormElements = (disabledObject) => {
+  for (let element of disabledObject) {
+    element.disabled = true;
+  }
+}
+
+export {setDisabledFormElements};
+
+
+const setUndisableFormElements = (undisabledObject) => {
+  for (let element of undisabledObject) {
+    element.disabled = false;
+  }
+}
+
+export {setUndisableFormElements};
