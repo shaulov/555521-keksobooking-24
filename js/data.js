@@ -70,8 +70,10 @@ const OFFER_DESCRIPTIONS = [
   'Отличные апартаменты с очень красивым видом.',
 ];
 
-const MIN_LOCATION_COORDINATE = 35.65000;
-const MAX_LOCATION_COORDINATE = 35.70000;
+const MIN_LOCATION_LAT = 35.65000;
+const MAX_LOCATION_LAT = 35.70000;
+const MIN_LOCATION_LNG = 139.30000;
+const MAX_LOCATION_LNG = 139.70000;
 const DECIMAL_POINTS_COUNT = 5;
 const MIN_PRICE = 1000;
 const MAX_PRICE = 10000;
@@ -116,13 +118,13 @@ const createSimilarAdNearby = (numberOfAd) => {
       photos: getOfferPhotos(),
     },
     location: {
-      lat: getRandomPositiveFloat(MIN_LOCATION_COORDINATE, MAX_LOCATION_COORDINATE, DECIMAL_POINTS_COUNT),
-      lng: getRandomPositiveFloat(MIN_LOCATION_COORDINATE, MAX_LOCATION_COORDINATE, DECIMAL_POINTS_COUNT),
+      lat: getRandomPositiveFloat(MIN_LOCATION_LAT, MAX_LOCATION_LAT, DECIMAL_POINTS_COUNT),
+      lng: getRandomPositiveFloat(MIN_LOCATION_LNG, MAX_LOCATION_LNG, DECIMAL_POINTS_COUNT),
     },
   }
 }
 
-const SIMILAR_AD_COUNT = 1;
+const SIMILAR_AD_COUNT = 10;
 const SIMILAR_AD = [];
 
 for (let currentObject = 0; currentObject < SIMILAR_AD_COUNT; currentObject++) {
