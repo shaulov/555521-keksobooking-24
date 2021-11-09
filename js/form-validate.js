@@ -9,6 +9,18 @@ const roomToGuest = {
   '3': ['1', '2', '3'],
   '100': ['0'],
 };
+const formType = document.querySelector('#type');
+const housingTypePrice = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
+};
+const formPrice = document.querySelector('#price');
+const formTimeSection = document.querySelector('.ad-form__element--time');
+const formTimeIn = document.querySelector('#timein');
+const formTimeOut = document.querySelector('#timeout');
 
 roomNumber.addEventListener('change', (evt) => {
   const currentRoomNumber = evt.target.value;
@@ -28,5 +40,20 @@ roomNumber.addEventListener('change', (evt) => {
     currentCapacity.disabled = false;
   });
 
+});
+
+formPrice.min = housingTypePrice[formType.value];
+formPrice.placeholder = housingTypePrice[formType.value];
+
+formType.addEventListener('change', (evt) => {
+  const currentType = evt.target.value;
+  formPrice.min = housingTypePrice[currentType];
+  formPrice.placeholder = housingTypePrice[currentType];
+});
+
+formTimeSection.addEventListener('change', (evt) => {
+  const currentTime = evt.target.value;
+  formTimeIn.querySelector(`option[value='${currentTime}'`).selected = true;
+  formTimeOut.querySelector(`option[value='${currentTime}'`).selected = true;
 });
 
