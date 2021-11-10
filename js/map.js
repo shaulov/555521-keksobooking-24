@@ -47,14 +47,6 @@ mainPinMarker.on('moveend', (evt) => {
   adressInput.value = `${mainMarkerCoords.lat.toFixed(3)}, ${mainMarkerCoords.lng.toFixed(3)}`;
 });
 
-const resetMainPinMarker = () => {
-  mainPinMarker.setLatLng({
-    lat: MAP_CENTER_LAT,
-    lng: MAP_CENTER_LNG,
-  });
-  adressInput.value = `${MAP_CENTER_LAT}, ${MAP_CENTER_LNG}`;
-}
-
 const markerGroup = L.layerGroup().addTo(map);
 
 const createMarker = (ad) => {
@@ -82,4 +74,13 @@ const createSimilarAdsOnMap = (ads) => {
   });
 }
 
-export {createSimilarAdsOnMap, resetMainPinMarker};
+const resetMap = () => {
+  mainPinMarker.setLatLng({
+    lat: MAP_CENTER_LAT,
+    lng: MAP_CENTER_LNG,
+  });
+  adressInput.value = `${MAP_CENTER_LAT}, ${MAP_CENTER_LNG}`;
+  map.closePopup();
+}
+
+export {createSimilarAdsOnMap, resetMap};

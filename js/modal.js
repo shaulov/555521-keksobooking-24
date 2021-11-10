@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {resetMainPinMarker} from './map.js'
+import {resetMap} from './map.js'
 
 'use strict';
 
@@ -28,7 +28,7 @@ const showSuccessMessage = () => {
   document.addEventListener('keydown', onMessageEscKeydown);
   document.addEventListener('click', onMessageClick);
   adForm.reset();
-  resetMainPinMarker();
+  resetMap();
 }
 
 const showErrorMessage = () => {

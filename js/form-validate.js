@@ -1,5 +1,5 @@
 import {sendData} from './api.js';
-import {resetMainPinMarker} from './map.js';
+import {resetMap} from './map.js';
 
 'use strict';
 
@@ -79,7 +79,7 @@ const setResetForm = () => {
   formResetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     adForm.reset();
-    resetMainPinMarker();
+    resetMap();
   });
 }
 
