@@ -1,3 +1,4 @@
+/* global L:readonly */
 import {setDeactivePage, setActivePage} from './form-activate.js';
 import {createSimilarAdPopup} from './popup.js';
 
