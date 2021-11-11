@@ -1,7 +1,8 @@
+/* global L:readonly */
 import {setDeactivePage, setActivePage} from './form-activate.js';
-import {SIMILAR_AD} from './data.js';
 import {createSimilarAdPopup} from './popup.js';
 
+'use strict';
 
 const MAP_CENTER_LAT = 35.690;
 const MAP_CENTER_LNG = 139.692;
@@ -44,7 +45,6 @@ adressInput.value = `${MAP_CENTER_LAT}, ${MAP_CENTER_LNG}`;
 
 mainPinMarker.on('moveend', (evt) => {
   const mainMarkerCoords = evt.target.getLatLng();
-  console.log(mainMarkerCoords);
   adressInput.value = `${mainMarkerCoords.lat.toFixed(3)}, ${mainMarkerCoords.lng.toFixed(3)}`;
 });
 
@@ -69,6 +69,19 @@ const createMarker = (ad) => {
     .bindPopup(createSimilarAdPopup(ad));
 }
 
-SIMILAR_AD.forEach((ad) => {
-  createMarker(ad);
-});
+const createSimilarAdsOnMap = (ads) => {
+  ads.forEach((ad) => {
+    createMarker(ad);
+  });
+}
+
+const resetMap = () => {
+  mainPinMarker.setLatLng({
+    lat: MAP_CENTER_LAT,
+    lng: MAP_CENTER_LNG,
+  });
+  adressInput.value = `${MAP_CENTER_LAT}, ${MAP_CENTER_LNG}`;
+  map.closePopup();
+}
+
+export {createSimilarAdsOnMap, resetMap};

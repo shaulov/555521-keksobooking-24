@@ -27,25 +27,28 @@ const createSimilarAdPopup = (ad) => {
 
   const featuresContainer = adElement.querySelector('.popup__features');
   const featuresList = featuresContainer.querySelectorAll('.popup__feature');
+  if (offer.features) {
+    const modifiers = offer.features.map((feature) => {
+      return `popup__feature--${feature}`;
+    });
 
-  const modifiers = offer.features.map((feature) => {
-    return `popup__feature--${feature}`;
-  });
+    featuresList.forEach((feature) => {
+      const modifier = feature.classList[1];
 
-  featuresList.forEach((feature) => {
-    const modifier = feature.classList[1];
+      if (!modifiers.includes(modifier)) {
+        feature.remove();
+      }
 
-    if (!modifiers.includes(modifier)) {
-      feature.remove();
-    }
-
-    if (!modifiers.length) {
-      featuresContainer.style.display = "none";
-    }
-  });
+      if (!modifiers.length) {
+        featuresContainer.style.display = "none";
+      }
+    });
+  } else {
+    featuresContainer.style.display = "none";
+  }
 
   const photosList = adElement.querySelector('.popup__photos');
-  if (offer.photos.length) {
+  if (offer.photos) {
     const fragment = document.createDocumentFragment();
     offer.photos.forEach((photoSrc) => {
       const adPhoto = adElement.querySelector('.popup__photo').cloneNode(true);

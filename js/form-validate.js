@@ -1,5 +1,9 @@
+import {sendData} from './api.js';
+import {resetMap} from './map.js';
+
 'use strict';
 
+const adForm = document.querySelector('.ad-form');
 const roomNumber = document.querySelector('#room_number');
 const capacity = document.querySelector('#capacity');
 const options = capacity.querySelectorAll('option');
@@ -21,6 +25,8 @@ const formPrice = document.querySelector('#price');
 const formTimeSection = document.querySelector('.ad-form__element--time');
 const formTimeIn = document.querySelector('#timein');
 const formTimeOut = document.querySelector('#timeout');
+
+const formResetButton = document.querySelector('.ad-form__reset');
 
 roomNumber.addEventListener('change', (evt) => {
   const currentRoomNumber = evt.target.value;
@@ -57,3 +63,24 @@ formTimeSection.addEventListener('change', (evt) => {
   formTimeOut.querySelector(`option[value='${currentTime}'`).selected = true;
 });
 
+const setFormSubmit = (onSuccess, onError) => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    sendData(
+      () => onSuccess(),
+      () => onError(),
+      new FormData(evt.target),
+    );
+  });
+}
+
+const setResetForm = () => {
+  formResetButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
+    adForm.reset();
+    resetMap();
+  });
+}
+
+export {setFormSubmit, setResetForm};
