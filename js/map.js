@@ -1,11 +1,13 @@
 /* global L:readonly */
 import {setDeactivePage, setActivePage} from './form-activate.js';
 import {createSimilarAdPopup} from './popup.js';
+import {filterAd} from './filter.js';
 
 'use strict';
 
 const MAP_CENTER_LAT = 35.690;
 const MAP_CENTER_LNG = 139.692;
+const SIMILAR_AD_COUNT = 10;
 
 setDeactivePage();
 
@@ -64,15 +66,20 @@ const createMarker = (ad) => {
     icon: pinIcon,
   });
 
-  marker
-    .addTo(markerGroup)
-    .bindPopup(createSimilarAdPopup(ad));
+  marker.bindPopup(createSimilarAdPopup(ad));
+
+  return marker;
 }
 
 const createSimilarAdsOnMap = (ads) => {
-  ads.forEach((ad) => {
-    createMarker(ad);
-  });
+  markerGroup.clearLayers();
+  ads
+    .filter(ad => filterAd(ad))
+    .slice(0, SIMILAR_AD_COUNT)
+    .forEach((ad) => {
+      const marker = createMarker(ad);
+      marker.addTo(markerGroup);
+    });
 }
 
 const resetMap = () => {
