@@ -1,16 +1,22 @@
-import './popup.js';
 import {setFormSubmit, setResetForm} from './form-validate.js';
 import {createSimilarAdsOnMap} from './map.js';
 import {getData} from './api.js';
 import {showAlert} from './util.js'
 import {showSuccessMessage, showErrorMessage} from './modal.js'
+import {setMapFilter} from './filter.js';
+import {debounce} from './utils/debounce.js';
+
 'use strict';
 
-const SIMILAR_AD_COUNT = 10;
+const RENDER_DELAY = 500;
 
 getData(
   (ads) => {
-    createSimilarAdsOnMap(ads.slice(0, SIMILAR_AD_COUNT));
+    createSimilarAdsOnMap(ads);
+    setMapFilter(debounce(
+      () => createSimilarAdsOnMap(ads),
+      RENDER_DELAY,
+    ));
   },
   () => showAlert('Произошла ошибка при загрузке похожих объявлений. Попробуйте обновить страницу позже')
 );
