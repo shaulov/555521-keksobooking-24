@@ -1,128 +1,52 @@
 'use strict';
 
-const TYPE_FILTER = {
-  'housing-type': 'type',
-  'housing-price': 'price',
-  'housing-rooms': 'rooms',
-  'housing-guests': 'guests',
-  'features': 'features',
-}
+const DEFAULT_VALUE = 'any';
 const PRICE_VALUE = {
   low: 10000,
   middle: [10000, 50000],
   high: 50000,
 };
-const DEFAULT_VALUE = 'any';
 
-const mapFilters = Array.from(document.querySelector('.map__filters').children);
+const mapFilters = document.querySelector('.map__filters');
+const housingTypeFilter = document.querySelector('#housing-type');
+const housingPriceFilter = document.querySelector('#housing-price');
+const housingRoomsFilter = document.querySelector('#housing-rooms');
+const housingGuestsFilter = document.querySelector('#housing-guests')
+const housingFeaturesFilter = Array.from(document.querySelector('#housing-features').children);
 
-const filterAdType = (ads, elementFilter) => {
-  const typeFilter = TYPE_FILTER[elementFilter.name];
-  const valueFilter = elementFilter.value;
-  const filteredAds = ads.filter((ad) => {
-    if (!ad.offer[typeFilter]) {
-      return;
-    }
-    return ad.offer[typeFilter] === valueFilter || valueFilter === DEFAULT_VALUE;
-  });
-  return filteredAds;
-};
+const filterAd = (ad) => {
+  let isHousingTypeFilter = ad.offer.type === housingTypeFilter.value || housingTypeFilter.value === DEFAULT_VALUE;
+  let isHousingPriceFilter = true;
+  let isHousingRoomsFilter = ad.offer.rooms === +housingRoomsFilter.value || housingRoomsFilter.value === DEFAULT_VALUE;
+  let isHousingGuestsFilter = ad.offer.guests === +housingGuestsFilter.value || housingGuestsFilter.value === DEFAULT_VALUE;
+  let isHousingFeaturesFilter = true;
+  const checkedHousingFeaturesFilter = housingFeaturesFilter.filter((feature) => feature.checked);
 
-const filterAdPrice = (ads, elementFilter) => {
-  const typeFilter = TYPE_FILTER[elementFilter.name];
-  const valueFilter = elementFilter.value;
-  const filteredAds = ads.filter((ad) => {
-    if (!ad.offer[typeFilter]) {
-      return;
-    }
-    if (valueFilter === 'low') {
-      return ad.offer[typeFilter] < PRICE_VALUE[valueFilter];
-    } else if (valueFilter === 'middle') {
-      return ad.offer[typeFilter] >= PRICE_VALUE[valueFilter][0] && ad.offer[typeFilter] <= PRICE_VALUE[valueFilter][1];
-    } else if (valueFilter === 'high') {
-      return ad.offer[typeFilter] > PRICE_VALUE[valueFilter];
-    } else {
-      return ad;
-    }
-  });
-  return filteredAds;
-};
-
-const filterAdRooms = (ads, elementFilter) => {
-  const typeFilter = TYPE_FILTER[elementFilter.name];
-  const valueFilter = elementFilter.value;
-
-  const filteredAds = ads.filter((ad) => {
-    if (!ad.offer[typeFilter]) {
-      return;
-    }
-    return ad.offer[typeFilter] === +valueFilter || valueFilter === DEFAULT_VALUE;
-  });
-  return filteredAds;
-};
-
-const filterAdGuests = (ads, elementFilter) => {
-  const typeFilter = TYPE_FILTER[elementFilter.name];
-  const valueFilter = elementFilter.value;
-
-  console.log(typeFilter, valueFilter);
-
-  const filteredAds = ads.filter((ad) => {
-    console.log(ad);
-    if (!ad.offer[typeFilter]) {
-      return;
-    }
-
-    return ad.offer[typeFilter] === +valueFilter || valueFilter === DEFAULT_VALUE;
-  });
-  return filteredAds;
-};
-
-const filterAdFeatures = (ads, elementFilter) => {
-  if (!elementFilter.checked) {
-    return ads;
+  if (housingPriceFilter.value === 'low') {
+    isHousingPriceFilter = ad.offer.price < PRICE_VALUE[housingPriceFilter.value];
+  } else if (housingPriceFilter.value === 'middle') {
+    isHousingPriceFilter = ad.offer.price >= PRICE_VALUE[housingPriceFilter.value][0] && ad.offer.price <= PRICE_VALUE[housingPriceFilter.value][1];
+  } else if (housingPriceFilter.value === 'high') {
+    isHousingPriceFilter = ad.offer.price > PRICE_VALUE[housingPriceFilter.value];
+  } else {
+    isHousingPriceFilter = housingPriceFilter.value === DEFAULT_VALUE;
   }
-  const typeFilter = TYPE_FILTER[elementFilter.name];
-  const valueFilter = elementFilter.value;
 
-  console.log(valueFilter);
-
-  const filteredAds = ads.filter((ad) => {
-    if (!ad.offer[typeFilter]) {
+  isHousingFeaturesFilter = checkedHousingFeaturesFilter.every((feature) => {
+    if (!ad.offer.features) {
       return;
     }
-
-    return ad.offer[typeFilter].includes(valueFilter);
+    return ad.offer.features.includes(feature.value);
   });
-  return filteredAds;
-};
 
-const setMapFilter = (cb, ads) => {
-  mapFilters.forEach((mapFilter) => {
-    mapFilter.addEventListener('change', (evt) => {
-      evt.preventDefault();
-      const elementFilter = evt.target;
-      switch (elementFilter.name) {
-        case 'housing-type':
-          cb(filterAdType(ads, elementFilter));
-          break;
-        case 'housing-price':
-          cb(filterAdPrice(ads, elementFilter));
-          break;
-        case 'housing-rooms':
-          cb(filterAdRooms(ads, elementFilter));
-          break;
-        case 'housing-guests':
-          cb(filterAdGuests(ads, elementFilter));
-          break;
-        case 'features':
-          cb(filterAdFeatures(ads, elementFilter));
-          break;
-        default:
-          cb(ads, elementFilter);
-      }
-    });
+  return isHousingTypeFilter && isHousingPriceFilter && isHousingRoomsFilter && isHousingGuestsFilter && isHousingFeaturesFilter;
+}
+
+const setMapFilter = (cb) => {
+  mapFilters.addEventListener('change', (evt) => {
+    evt.preventDefault();
+    cb();
   });
 }
 
-export {setMapFilter};
+export {setMapFilter, filterAd};

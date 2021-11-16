@@ -1,6 +1,7 @@
 /* global L:readonly */
 import {setDeactivePage, setActivePage} from './form-activate.js';
 import {createSimilarAdPopup} from './popup.js';
+import {filterAd} from './filter.js';
 
 'use strict';
 
@@ -73,6 +74,7 @@ const createMarker = (ad) => {
 const createSimilarAdsOnMap = (ads) => {
   markerGroup.clearLayers();
   ads
+    .filter((ad) => filterAd(ad))
     .slice(0, SIMILAR_AD_COUNT)
     .forEach((ad) => {
       const marker = createMarker(ad);
