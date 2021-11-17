@@ -1,5 +1,5 @@
 /* global L:readonly */
-import {setDeactivePage, setActivePage} from './form-activate.js';
+import {setDeactivePage, setActivePageAdForm} from './form-activate.js';
 import {createSimilarAdPopup} from './popup.js';
 import {filterAd} from './filter.js';
 
@@ -13,7 +13,7 @@ setDeactivePage();
 
 const map = L.map('map-canvas')
   .on('load', () => {
-    setActivePage();
+    setActivePageAdForm();
   })
   .setView({
     lat: MAP_CENTER_LAT,

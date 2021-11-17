@@ -5,6 +5,7 @@ import {showAlert} from './util.js';
 import {showSuccessMessage, showErrorMessage} from './modal.js';
 import {setMapFilter} from './filter.js';
 import {debounce} from './utils/debounce.js';
+import {setActivePageFilterForm} from './form-activate.js';
 
 'use strict';
 
@@ -17,6 +18,7 @@ getData(
       () => createSimilarAdsOnMap(ads),
       RENDER_DELAY,
     ));
+    setActivePageFilterForm();
   },
   () => showAlert('Произошла ошибка при загрузке похожих объявлений. Попробуйте обновить страницу позже'),
 );
