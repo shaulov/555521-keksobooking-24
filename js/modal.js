@@ -1,5 +1,5 @@
 import {isEscapeKey} from './util.js';
-import {resetMap} from './map.js'
+import {resetMap} from './map.js';
 
 'use strict';
 
@@ -17,11 +17,11 @@ const onMessageEscKeydown = (evt) => {
     evt.preventDefault();
     closeMessage();
   }
-}
+};
 
 const onMessageClick = () => {
   closeMessage();
-}
+};
 
 const showSuccessMessage = () => {
   document.body.appendChild(successMessage);
@@ -29,19 +29,19 @@ const showSuccessMessage = () => {
   document.addEventListener('click', onMessageClick);
   adForm.reset();
   resetMap();
-}
+};
 
 const showErrorMessage = () => {
   document.body.appendChild(errorMessage);
   errorButtonClose.addEventListener('click', onMessageClick);
   document.addEventListener('keydown', onMessageEscKeydown);
   document.addEventListener('click', onMessageClick);
-}
+};
 
 const closeMessage = () => {
   document.querySelector('body').lastChild.remove();
   document.removeEventListener('keydown', onMessageEscKeydown);
   document.removeEventListener('click', onMessageClick);
-}
+};
 
 export {showSuccessMessage, showErrorMessage};

@@ -8,7 +8,7 @@ const getRandomPositiveFloat = (a, b, digits = 1) => {
   const result = Math.random() * (upper - lower) + lower;
 
   return result.toFixed(digits);
-}
+};
 
 export {getRandomPositiveFloat};
 
@@ -18,7 +18,7 @@ const getRandomPositiveInteger = (a, b) => {
   const result = Math.random() * (upper - lower + 1) + lower;
 
   return Math.floor(result);
-}
+};
 
 export {getRandomPositiveInteger};
 
@@ -29,19 +29,19 @@ const getRandomArrayElement = (array) => {
 export {getRandomArrayElement};
 
 const setDisabledFormElements = (disabledObject) => {
-  for (let element of disabledObject) {
+  for (const element of disabledObject) {
     element.disabled = true;
   }
-}
+};
 
 export {setDisabledFormElements};
 
 
 const setUndisableFormElements = (undisabledObject) => {
-  for (let element of undisabledObject) {
+  for (const element of undisabledObject) {
     element.disabled = false;
   }
-}
+};
 
 export {setUndisableFormElements};
 
@@ -67,7 +67,7 @@ const showAlert = (message) => {
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
-}
+};
 
 export {showAlert};
 

@@ -36,13 +36,13 @@ roomNumber.addEventListener('change', (evt) => {
   });
 
   if (currentRoomNumber === '100') {
-    capacity.querySelector(`option[value='0']`).selected = true;
+    capacity.querySelector('option[value=0]').selected = true;
   } else {
     capacity.querySelector(`option[value='${currentRoomNumber}']`).selected = true;
   }
 
   roomToGuest[currentRoomNumber].forEach((value) => {
-    const currentCapacity = capacity.querySelector(`option[value='${value}']`)
+    const currentCapacity = capacity.querySelector(`option[value='${value}']`);
     currentCapacity.disabled = false;
   });
 
@@ -73,7 +73,7 @@ const setFormSubmit = (onSuccess, onError) => {
       new FormData(evt.target),
     );
   });
-}
+};
 
 const setResetForm = () => {
   formResetButton.addEventListener('click', (evt) => {
@@ -81,6 +81,6 @@ const setResetForm = () => {
     adForm.reset();
     resetMap();
   });
-}
+};
 
 export {setFormSubmit, setResetForm};
