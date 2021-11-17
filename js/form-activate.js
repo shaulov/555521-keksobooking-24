@@ -15,12 +15,14 @@ const setDeactivePage = () => {
   setDisabledFormElements(mapFiltersFormElements);
 };
 
-const setActivePage = () => {
+const setActivePageAdForm = () => {
   adForm.classList.remove('ad-form--disabled');
   setUndisableFormElements(adFormElements);
+};
 
+const setActivePageFilterForm = () => {
   mapFiltersForm.classList.remove('map__filters--disabled');
   setUndisableFormElements(mapFiltersFormElements);
 };
 
-export {setDeactivePage, setActivePage};
+export {setDeactivePage, setActivePageAdForm, setActivePageFilterForm};
