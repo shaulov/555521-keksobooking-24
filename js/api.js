@@ -4,7 +4,7 @@ const getData = (onSuccess, onError) => {
   fetch('https://24.javascript.pages.academy/keksobooking/data')
     .then((response) => {
       if(response.ok) {
-        return response.json()
+        return response.json();
       }
 
       throw new Error(`${response.status} - ${response.statusText}`);
@@ -23,7 +23,7 @@ const sendData = (onSuccess, onError, body) => {
     {
       method: 'POST',
       body,
-    }
+    },
   )
     .then((response) => {
       if (response.ok) {
@@ -35,6 +35,6 @@ const sendData = (onSuccess, onError, body) => {
     .catch(() => {
       onError();
     });
-}
+};
 
 export {getData, sendData};

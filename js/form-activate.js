@@ -13,7 +13,7 @@ const setDeactivePage = () => {
 
   mapFiltersForm.classList.add('map__filters--disabled');
   setDisabledFormElements(mapFiltersFormElements);
-}
+};
 
 const setActivePage = () => {
   adForm.classList.remove('ad-form--disabled');
@@ -21,6 +21,6 @@ const setActivePage = () => {
 
   mapFiltersForm.classList.remove('map__filters--disabled');
   setUndisableFormElements(mapFiltersFormElements);
-}
+};
 
 export {setDeactivePage, setActivePage};

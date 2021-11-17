@@ -69,7 +69,7 @@ const createMarker = (ad) => {
   marker.bindPopup(createSimilarAdPopup(ad));
 
   return marker;
-}
+};
 
 const createSimilarAdsOnMap = (ads) => {
   markerGroup.clearLayers();
@@ -80,7 +80,7 @@ const createSimilarAdsOnMap = (ads) => {
       const marker = createMarker(ad);
       marker.addTo(markerGroup);
     });
-}
+};
 
 const resetMap = () => {
   mainPinMarker.setLatLng({
@@ -89,6 +89,6 @@ const resetMap = () => {
   });
   adressInput.value = `${MAP_CENTER_LAT}, ${MAP_CENTER_LNG}`;
   map.closePopup();
-}
+};
 
 export {createSimilarAdsOnMap, resetMap};
