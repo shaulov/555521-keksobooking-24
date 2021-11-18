@@ -74,7 +74,9 @@ const createMarker = (ad) => {
 const createSimilarAdsOnMap = (ads) => {
   markerGroup.clearLayers();
   ads
-    .filter((ad) => filterAd(ad))
+    .filter((ad) => {
+      filterAd(ad);
+    })
     .slice(0, SIMILAR_AD_COUNT)
     .forEach((ad) => {
       const marker = createMarker(ad);

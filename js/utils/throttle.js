@@ -20,6 +20,6 @@ const throttle = (callback, delayBetweenFrames) => {
       lastTime = now;
     }
   };
-}
+};
 
 export {throttle};
