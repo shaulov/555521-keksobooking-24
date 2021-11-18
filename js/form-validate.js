@@ -26,24 +26,30 @@ const formTimeIn = document.querySelector('#timein');
 const formTimeOut = document.querySelector('#timeout');
 const formResetButton = document.querySelector('.ad-form__reset');
 
-roomNumber.addEventListener('change', (evt) => {
-  const currentRoomNumber = evt.target.value;
+const setCapacityDisable = (roomNumber) => {
   options.forEach((option) => {
     option.selected = false;
     option.disabled = true;
   });
 
-  if (currentRoomNumber === '100') {
-    capacity.querySelector('option[value=0]').selected = true;
+  if (roomNumber === '100') {
+    capacity.querySelector(`option[value='${roomToGuest['100']}']`).selected = true;
   } else {
-    capacity.querySelector(`option[value='${currentRoomNumber}']`).selected = true;
+    capacity.querySelector(`option[value='${roomNumber}']`).selected = true;
   }
 
-  roomToGuest[currentRoomNumber].forEach((value) => {
+  roomToGuest[roomNumber].forEach((value) => {
     const currentCapacity = capacity.querySelector(`option[value='${value}']`);
     currentCapacity.disabled = false;
   });
+};
 
+setCapacityDisable(roomNumber.value);
+
+roomNumber.addEventListener('change', (evt) => {
+  const currentRoomNumber = evt.target.value;
+
+  setCapacityDisable(currentRoomNumber);
 });
 
 formPrice.min = housingTypePrice[formType.value];
@@ -76,7 +82,9 @@ const setFormSubmit = (onSuccess, onError) => {
 const resetForm = () => {
   adForm.reset();
   mapFiltersForm.reset();
-}
+  formPrice.placeholder = housingTypePrice[formType.value];
+  setCapacityDisable(roomNumber.value);
+};
 
 const setResetForm = () => {
   formResetButton.addEventListener('click', (evt) => {
