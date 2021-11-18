@@ -15,16 +15,16 @@ const housingTypePrice = {
   palace: 10000,
 };
 const adForm = document.querySelector('.ad-form');
-const mapFiltersForm = document.querySelector('.map__filters');
-const roomNumber = document.querySelector('#room_number');
-const capacity = document.querySelector('#capacity');
+const roomNumber = adForm.querySelector('#room_number');
+const capacity = adForm.querySelector('#capacity');
 const options = capacity.querySelectorAll('option');
-const formType = document.querySelector('#type');
-const formPrice = document.querySelector('#price');
-const formTimeSection = document.querySelector('.ad-form__element--time');
-const formTimeIn = document.querySelector('#timein');
-const formTimeOut = document.querySelector('#timeout');
-const formResetButton = document.querySelector('.ad-form__reset');
+const formType = adForm.querySelector('#type');
+const formPrice = adForm.querySelector('#price');
+const formTimeSection = adForm.querySelector('.ad-form__element--time');
+const formTimeIn = adForm.querySelector('#timein');
+const formTimeOut = adForm.querySelector('#timeout');
+const formResetButton = adForm.querySelector('.ad-form__reset');
+const mapFiltersForm = document.querySelector('.map__filters');
 
 const setCapacityDisable = (roomNumber) => {
   options.forEach((option) => {

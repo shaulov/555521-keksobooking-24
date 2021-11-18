@@ -72,12 +72,18 @@ const createMarker = (ad) => {
 };
 
 const createSimilarAdsOnMap = (ads) => {
+  let similarAdCounter = 0;
   markerGroup.clearLayers();
   ads
     .filter((ad) => {
-      filterAd(ad);
+      while (similarAdCounter < SIMILAR_AD_COUNT) {
+        const isFiltered = filterAd(ad);
+        if (isFiltered) {
+          similarAdCounter++;
+        }
+        return filterAd(ad);
+      }
     })
-    .slice(0, SIMILAR_AD_COUNT)
     .forEach((ad) => {
       const marker = createMarker(ad);
       marker.addTo(markerGroup);
@@ -93,4 +99,4 @@ const resetMap = () => {
   map.closePopup();
 };
 
-export {createSimilarAdsOnMap, resetMap, SIMILAR_AD_COUNT};
+export {createSimilarAdsOnMap, resetMap};

@@ -5,12 +5,12 @@ const PRICE_VALUE = {
   high: 50000,
 };
 
-const mapFilters = document.querySelector('.map__filters');
-const housingTypeFilter = mapFilters.querySelector('#housing-type');
-const housingPriceFilter = mapFilters.querySelector('#housing-price');
-const housingRoomsFilter = mapFilters.querySelector('#housing-rooms');
-const housingGuestsFilter = mapFilters.querySelector('#housing-guests');
-const housingFeaturesFilter = Array.from(mapFilters.querySelector('#housing-features').children);
+const mapFiltersForm = document.querySelector('.map__filters');
+const housingTypeFilter = mapFiltersForm.querySelector('#housing-type');
+const housingPriceFilter = mapFiltersForm.querySelector('#housing-price');
+const housingRoomsFilter = mapFiltersForm.querySelector('#housing-rooms');
+const housingGuestsFilter = mapFiltersForm.querySelector('#housing-guests');
+const housingFeaturesFilter = Array.from(mapFiltersForm.querySelector('#housing-features').children);
 
 const isHousingTypeFilter = (ad) => {
   return ad.offer.type === housingTypeFilter.value || housingTypeFilter.value === DEFAULT_VALUE;
@@ -37,12 +37,11 @@ const isHousingGuestsFilter = (ad) => {
 };
 
 const isHousingFeaturesFilter = (ad) => {
-  if (!ad.offer.features) {
-    return;
-  }
   const checkedHousingFeaturesFilter = housingFeaturesFilter.filter((feature) => feature.checked);
   const isFilter = checkedHousingFeaturesFilter.every((feature) => {
-    return ad.offer.features.includes(feature.value);
+    if (ad.offer.features) {
+      return ad.offer.features.includes(feature.value);
+    }
   });
 
   return isFilter;
@@ -53,7 +52,7 @@ const filterAd = (ad) => {
 };
 
 const setMapFilter = (cb) => {
-  mapFilters.addEventListener('change', (evt) => {
+  mapFiltersForm.addEventListener('change', (evt) => {
     evt.preventDefault();
     cb();
   });
