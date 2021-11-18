@@ -91,4 +91,4 @@ const resetMap = () => {
   map.closePopup();
 };
 
-export {createSimilarAdsOnMap, resetMap};
+export {createSimilarAdsOnMap, resetMap, SIMILAR_AD_COUNT};
