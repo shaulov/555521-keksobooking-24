@@ -1,7 +1,5 @@
 import {setDisabledFormElements, setUndisableFormElements} from './util.js';
 
-'use strict';
-
 const adForm = document.querySelector('.ad-form');
 const adFormElements = adForm.children;
 const mapFiltersForm = document.querySelector('.map__filters');

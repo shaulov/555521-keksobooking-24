@@ -1,5 +1,3 @@
-'use strict';
-
 const OFFER_TYPE_VALUES = {
   'flat': 'Квартира',
   'bungalow': 'Бунгало',

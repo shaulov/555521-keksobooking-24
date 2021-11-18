@@ -1,9 +1,8 @@
 import {isEscapeKey} from './util.js';
 import {resetMap} from './map.js';
 
-'use strict';
-
 const adForm = document.querySelector('.ad-form');
+const mapFiltersForm = document.querySelector('.map__filters');
 
 const templateSuccessMessage = document.querySelector('#success').content;
 const successMessage = templateSuccessMessage.children[0];
@@ -28,6 +27,7 @@ const showSuccessMessage = () => {
   document.addEventListener('keydown', onMessageEscKeydown);
   document.addEventListener('click', onMessageClick);
   adForm.reset();
+  mapFiltersForm.reset();
   resetMap();
 };
 

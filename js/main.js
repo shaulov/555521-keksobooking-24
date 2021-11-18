@@ -7,8 +7,6 @@ import {setMapFilter} from './filter.js';
 import {debounce} from './utils/debounce.js';
 import {setActivePageFilterForm} from './form-activate.js';
 
-'use strict';
-
 const RENDER_DELAY = 500;
 
 getData(

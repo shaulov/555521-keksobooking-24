@@ -1,19 +1,12 @@
 import {sendData} from './api.js';
 import {resetMap} from './map.js';
 
-'use strict';
-
-const adForm = document.querySelector('.ad-form');
-const roomNumber = document.querySelector('#room_number');
-const capacity = document.querySelector('#capacity');
-const options = capacity.querySelectorAll('option');
 const roomToGuest = {
   '1': ['1'],
   '2': ['1', '2'],
   '3': ['1', '2', '3'],
   '100': ['0'],
 };
-const formType = document.querySelector('#type');
 const housingTypePrice = {
   bungalow: 0,
   flat: 1000,
@@ -21,11 +14,16 @@ const housingTypePrice = {
   house: 5000,
   palace: 10000,
 };
+const adForm = document.querySelector('.ad-form');
+const mapFiltersForm = document.querySelector('.map__filters');
+const roomNumber = document.querySelector('#room_number');
+const capacity = document.querySelector('#capacity');
+const options = capacity.querySelectorAll('option');
+const formType = document.querySelector('#type');
 const formPrice = document.querySelector('#price');
 const formTimeSection = document.querySelector('.ad-form__element--time');
 const formTimeIn = document.querySelector('#timein');
 const formTimeOut = document.querySelector('#timeout');
-
 const formResetButton = document.querySelector('.ad-form__reset');
 
 roomNumber.addEventListener('change', (evt) => {
@@ -75,10 +73,13 @@ const setFormSubmit = (onSuccess, onError) => {
   });
 };
 
+
+
 const setResetForm = () => {
   formResetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
     adForm.reset();
+    mapFiltersForm.reset();
     resetMap();
   });
 };

@@ -3,10 +3,10 @@ import {setDeactivePage, setActivePageAdForm} from './form-activate.js';
 import {createSimilarAdPopup} from './popup.js';
 import {filterAd} from './filter.js';
 
-'use strict';
-
 const MAP_CENTER_LAT = 35.690;
 const MAP_CENTER_LNG = 139.692;
+const MAP_ZOOM = 13;
+const COORD_DECIMAL_PLACES = 5;
 const SIMILAR_AD_COUNT = 10;
 
 setDeactivePage();
@@ -18,7 +18,7 @@ const map = L.map('map-canvas')
   .setView({
     lat: MAP_CENTER_LAT,
     lng: MAP_CENTER_LNG,
-  }, 10);
+  }, MAP_ZOOM);
 
 L.tileLayer(
   'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -47,7 +47,7 @@ adressInput.value = `${MAP_CENTER_LAT}, ${MAP_CENTER_LNG}`;
 
 mainPinMarker.on('moveend', (evt) => {
   const mainMarkerCoords = evt.target.getLatLng();
-  adressInput.value = `${mainMarkerCoords.lat.toFixed(3)}, ${mainMarkerCoords.lng.toFixed(3)}`;
+  adressInput.value = `${mainMarkerCoords.lat.toFixed(COORD_DECIMAL_PLACES)}, ${mainMarkerCoords.lng.toFixed(COORD_DECIMAL_PLACES)}`;
 });
 
 const markerGroup = L.layerGroup().addTo(map);

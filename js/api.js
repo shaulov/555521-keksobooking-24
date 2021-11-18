@@ -1,5 +1,3 @@
-'use strict';
-
 const getData = (onSuccess, onError) => {
   fetch('https://24.javascript.pages.academy/keksobooking/data')
     .then((response) => {

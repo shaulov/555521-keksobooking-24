@@ -1,5 +1,3 @@
-'use strict';
-
 const DEFAULT_VALUE = 'any';
 const PRICE_VALUE = {
   low: 10000,

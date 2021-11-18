@@ -1,7 +1,7 @@
-'use strict';
+const ALERT_SHOW_TIME = 5000;
+
 // Функции getRandomPositiveFloat и getRandomPositiveInteger взяты из интернета и доработаны
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
-
 const getRandomPositiveFloat = (a, b, digits = 1) => {
   const lower = Math.min(Math.abs(a), Math.abs(b));
   const upper = Math.max(Math.abs(a), Math.abs(b));
@@ -46,8 +46,6 @@ const setUndisableFormElements = (undisabledObject) => {
 export {setUndisableFormElements};
 
 // Позаимствовано из демонстрации курса
-const ALERT_SHOW_TIME = 5000;
-
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
   alertContainer.style.zIndex = 100;
