@@ -73,15 +73,17 @@ const setFormSubmit = (onSuccess, onError) => {
   });
 };
 
-
+const resetForm = () => {
+  adForm.reset();
+  mapFiltersForm.reset();
+}
 
 const setResetForm = () => {
   formResetButton.addEventListener('click', (evt) => {
     evt.preventDefault();
-    adForm.reset();
-    mapFiltersForm.reset();
+    resetForm();
     resetMap();
   });
 };
 
-export {setFormSubmit, setResetForm};
+export {setFormSubmit, setResetForm, resetForm};
