@@ -2,6 +2,13 @@
 import {setDeactivePage, setActivePageAdForm} from './form-activate.js';
 import {createSimilarAdPopup} from './popup.js';
 import {filterAd} from './filter.js';
+import {getData} from './api.js';
+import {setMapFilter} from './filter.js';
+import {debounce} from './utils/debounce.js';
+import {setActivePageFilterForm} from './form-activate.js';
+import {showAlert} from './util.js';
+
+const RENDER_DELAY = 500;
 
 const MAP_CENTER_LAT = 35.690;
 const MAP_CENTER_LNG = 139.692;
@@ -14,6 +21,17 @@ setDeactivePage();
 const map = L.map('map-canvas')
   .on('load', () => {
     setActivePageAdForm();
+    getData(
+      (ads) => {
+        createSimilarAdsOnMap(ads);
+        setMapFilter(debounce(
+          () => createSimilarAdsOnMap(ads),
+          RENDER_DELAY,
+        ));
+        setActivePageFilterForm();
+      },
+      () => showAlert('Произошла ошибка при загрузке похожих объявлений. Попробуйте обновить страницу позже'),
+    );
   })
   .setView({
     lat: MAP_CENTER_LAT,
@@ -97,6 +115,12 @@ const resetMap = () => {
   });
   adressInput.value = `${MAP_CENTER_LAT}, ${MAP_CENTER_LNG}`;
   map.closePopup();
+  getData(
+    (ads) => {
+      createSimilarAdsOnMap(ads);
+    },
+    () => showAlert('Произошла ошибка при загрузке похожих объявлений. Попробуйте обновить страницу позже'),
+  );
 };
 
 export {createSimilarAdsOnMap, resetMap};
