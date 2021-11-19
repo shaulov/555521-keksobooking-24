@@ -1,11 +1,9 @@
 /* global L:readonly */
-import {setDeactivePage, setActivePageAdForm} from './form-activate.js';
+import {setDeactivePage, setActivePageAdForm, setActivePageFilterForm} from './form-activate.js';
 import {createSimilarAdPopup} from './popup.js';
-import {filterAd} from './filter.js';
+import {filterAd, setMapFilter} from './filter.js';
 import {getData} from './api.js';
-import {setMapFilter} from './filter.js';
 import {debounce} from './utils/debounce.js';
-import {setActivePageFilterForm} from './form-activate.js';
 import {showAlert} from './util.js';
 
 const RENDER_DELAY = 500;
