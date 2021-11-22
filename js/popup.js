@@ -1,9 +1,9 @@
-const OFFER_TYPE_VALUES = {
-  'flat': 'Квартира',
-  'bungalow': 'Бунгало',
-  'house': 'Дом',
-  'palace': 'Дворец',
-  'hotel': 'Отель',
+const OfferTypeValues = {
+  FLAT: 'Квартира',
+  BUNGALOW: 'Бунгало',
+  HOUSE: 'Дом',
+  PALACE: 'Дворец',
+  HOTEL: 'Отель',
 };
 
 const template = document.querySelector('#card').content;
@@ -18,7 +18,7 @@ const createSimilarAdPopup = (ad) => {
   offer.title ? adElement.querySelector('.popup__title').textContent = offer.title : adElement.querySelector('.popup__title').style.display = 'none';
   offer.address ? adElement.querySelector('.popup__text--address').textContent = offer.address : adElement.querySelector('.text--address').style.display = 'none';
   offer.price ? adElement.querySelector('.popup__text--price').textContent = `${offer.price} ₽/ночь` : adElement.querySelector('.popup__text--price').style.display = 'none';
-  offer.type ? adElement.querySelector('.popup__type').textContent = OFFER_TYPE_VALUES[offer.type] : adElement.querySelector('.popup__type').style.display = 'none';
+  offer.type ? adElement.querySelector('.popup__type').textContent = OfferTypeValues[offer.type.toUpperCase()] : adElement.querySelector('.popup__type').style.display = 'none';
   (offer.rooms || offer.guests) ? adElement.querySelector('.popup__text--capacity').textContent = `${offer.rooms} комнаты для ${offer.guests} гостей`: adElement.querySelector('.popup__text--capacity').style.display = 'none';
   (offer.checkin || offer.checkout) ? adElement.querySelector('.popup__text--time').textContent = `Заезд после ${offer.checkin}, выезд до ${offer.checkout}`: adElement.querySelector('.popup__text--time').style.display = 'none';
   offer.description ? adElement.querySelector('.popup__description').textContent = offer.description : adElement.querySelector('.popup__description').style.display = 'none';

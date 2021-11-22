@@ -1,33 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
 
-// Функции getRandomPositiveFloat и getRandomPositiveInteger взяты из интернета и доработаны
-// Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
-const getRandomPositiveFloat = (a, b, digits = 1) => {
-  const lower = Math.min(Math.abs(a), Math.abs(b));
-  const upper = Math.max(Math.abs(a), Math.abs(b));
-  const result = Math.random() * (upper - lower) + lower;
-
-  return result.toFixed(digits);
-};
-
-export {getRandomPositiveFloat};
-
-const getRandomPositiveInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(Math.abs(a), Math.abs(b)));
-  const upper = Math.floor(Math.max(Math.abs(a), Math.abs(b)));
-  const result = Math.random() * (upper - lower + 1) + lower;
-
-  return Math.floor(result);
-};
-
-export {getRandomPositiveInteger};
-
-const getRandomArrayElement = (array) => {
-  return array[getRandomPositiveInteger(0, array.length - 1)];
-};
-
-export {getRandomArrayElement};
-
 const setDisabledFormElements = (disabledObject) => {
   for (const element of disabledObject) {
     element.disabled = true;

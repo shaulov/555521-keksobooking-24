@@ -7,12 +7,12 @@ const roomToGuest = {
   '3': ['1', '2', '3'],
   '100': ['0'],
 };
-const housingTypePrice = {
-  bungalow: 0,
-  flat: 1000,
-  hotel: 3000,
-  house: 5000,
-  palace: 10000,
+const HousingTypePrice = {
+  BUNGALOW: 0,
+  FLAT: 1000,
+  HOTEL: 3000,
+  HOUSE: 5000,
+  PALACE: 10000,
 };
 const adForm = document.querySelector('.ad-form');
 const roomNumber = adForm.querySelector('#room_number');
@@ -52,13 +52,13 @@ roomNumber.addEventListener('change', (evt) => {
   setCapacityDisable(currentRoomNumber);
 });
 
-formPrice.min = housingTypePrice[formType.value];
-formPrice.placeholder = housingTypePrice[formType.value];
+formPrice.min = HousingTypePrice[formType.value.toUpperCase()];
+formPrice.placeholder = HousingTypePrice[formType.value.toUpperCase()];
 
 formType.addEventListener('change', (evt) => {
   const currentType = evt.target.value;
-  formPrice.min = housingTypePrice[currentType];
-  formPrice.placeholder = housingTypePrice[currentType];
+  formPrice.min = HousingTypePrice[currentType.toUpperCase()];
+  formPrice.placeholder = HousingTypePrice[currentType.toUpperCase()];
 });
 
 formTimeSection.addEventListener('change', (evt) => {
@@ -82,7 +82,7 @@ const setFormSubmit = (onSuccess, onError) => {
 const resetForm = () => {
   adForm.reset();
   mapFiltersForm.reset();
-  formPrice.placeholder = housingTypePrice[formType.value];
+  formPrice.placeholder = HousingTypePrice[formType.value.toUpperCase()];
   setCapacityDisable(roomNumber.value);
 };
 

@@ -89,17 +89,21 @@ const createMarker = (ad) => {
 
 const createSimilarAdsOnMap = (ads) => {
   let similarAdCounter = 0;
+  const filteredAds = [];
   markerGroup.clearLayers();
-  ads
-    .filter((ad) => {
-      while (similarAdCounter < SIMILAR_AD_COUNT) {
-        const isFiltered = filterAd(ad);
-        if (isFiltered) {
-          similarAdCounter++;
-        }
-        return filterAd(ad);
-      }
-    })
+  for (let i = 0; i < ads.length; i++) {
+    console.log(ads[i]);
+    const isFiltered = filterAd(ads[i]);
+    if (isFiltered) {
+      similarAdCounter++;
+      filteredAds.push(ads[i]);
+    }
+
+    if (similarAdCounter === SIMILAR_AD_COUNT) {
+      break;
+    }
+  }
+  filteredAds
     .forEach((ad) => {
       const marker = createMarker(ad);
       marker.addTo(markerGroup);
