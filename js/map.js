@@ -92,7 +92,6 @@ const createSimilarAdsOnMap = (ads) => {
   const filteredAds = [];
   markerGroup.clearLayers();
   for (let i = 0; i < ads.length; i++) {
-    console.log(ads[i]);
     const isFiltered = filterAd(ads[i]);
     if (isFiltered) {
       similarAdCounter++;
